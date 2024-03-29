@@ -1,4 +1,27 @@
-alert("Selamat Datang");
+// alert("Selamat Datang");
+//title
+function getTitle() {
+  let title = "List User";
+  document.getElementById("title").innerHTML = title;
+}
+
+//date update
+function getDateTime() {
+  const date = new Date();
+
+  const formatIndonesia = new Intl.DateTimeFormat("id-ID", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+
+  const text = "Update at : ";
+  document.getElementById("date").innerHTML = text + formatIndonesia;
+}
+
+//get data
 async function getData() {
   try {
     let data = await fetch("https://dummyjson.com/users");
@@ -13,32 +36,14 @@ async function getData() {
 function rowsData(data) {
   return `
     <td class="py-2 px-10 border">${data.id}</td>
-    <td class="py-2 px-10 border">${data.firstName}</td>
-    <td class="py-2 px-10 border">${data.lastName}</td>
+    <td class="py-2 px-10 border">${data.firstName} ${data.lastName}</td>
+    <td class="py-2 px-10 border">${data.phone}</td>
     <td class="py-2 px-10 border">${data.email}</td>
     <td class="py-2 px-10 border">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded" id="viewbtn">View</td>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded" id="detailData"" onclick="getDetailData(${data.id})">View</td>
     `;
 }
 
-function displayData(dataUsers) {
-  console.log(dataUsers, "ini data");
-  const containerElm = document.getElementById("tableUsers");
-
-  dataUsers.forEach((user) => {
-    let rows = document.createElement("tr");
-    rows.innerHTML = rowsData(user);
-    containerElm.appendChild(rows);
-  });
-}
+getTitle();
 getData();
-
-function viewbtn() {
-  const viewBtn = document.getElementById("viewbtn");
-
-  // Attach a click event listener to the button
-  viewBtn.addEventListener("click", function () {
-    // Function to run when the button is clicked
-    alert("Button clicked!");
-  });
-}
+getDateTime();
