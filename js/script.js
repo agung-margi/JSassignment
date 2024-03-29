@@ -1,4 +1,4 @@
-// alert("Selamat Datang");
+alert("Selamat Datang");
 //title
 function getTitle() {
   let title = "List User";
@@ -34,14 +34,24 @@ async function getData() {
 }
 
 function rowsData(data) {
+  let gender = data.gender == "male" ? "#15F5BA" : "#FF204E";
   return `
     <td class="py-2 px-10 border">${data.id}</td>
     <td class="py-2 px-10 border">${data.firstName} ${data.lastName}</td>
     <td class="py-2 px-10 border">${data.phone}</td>
     <td class="py-2 px-10 border">${data.email}</td>
-    <td class="py-2 px-10 border">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded" id="detailData"" onclick="getDetailData(${data.id})">View</td>
+    <td class="py-2 px-10 border bg-[${gender}] rounded-full drop-shadow-2xl">${data.gender}</td>
     `;
+}
+
+function displayData(dataUsers) {
+  const containerElm = document.getElementById("tableUsers");
+
+  dataUsers.forEach((user) => {
+    let rows = document.createElement("tr");
+    rows.innerHTML = rowsData(user);
+    containerElm.appendChild(rows);
+  });
 }
 
 getTitle();
