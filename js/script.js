@@ -1,4 +1,3 @@
-alert("Selamat Datang");
 //title
 function getTitle() {
   let title = "List User";
@@ -57,3 +56,5 @@ function displayData(dataUsers) {
 getTitle();
 getData();
 getDateTime();
+
+alert("Selamat Datang");
